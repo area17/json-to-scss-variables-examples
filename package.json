@@ -4,13 +4,17 @@
   "description": "Examples of compiling SCSS with tokens provided by a JSON file",
   "author": "A17 <dev@area17.com> (https://area17.com/)",
   "license": "MIT",
+  "scripts": {
+    "sass:build": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./application.scss:./application.css",
+    "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./application.scss:./application.css",
+    "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
+    "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
+    "watch": "npm run sass:watch & npm run tokens:watch"
+  },
   "dependencies": {
     "@area17/scss-utilities": "^1.0.0",
     "json-to-scss": "github:area17/json-to-scss",
+    "nodemon": "^2.0.19",
     "sass": "^1.53.0"
-  },
-  "scripts": {
-    "sass": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./application.scss:./application.css",
-    "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv"
   }
 }
