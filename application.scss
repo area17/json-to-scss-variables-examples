@@ -1,0 +1,15 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ include setup tokens
+
+@import '_tokens';
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ include A17 SCSS Utilities
+
+$a17-scss-generate-classes: (
+  colspan: true,
+  grid: true,
+  color: true,
+  spacing: true,
+  typography: true,
+  devtools: true,
+);
+@import '@area17/scss-utilities/a17-scss-utilities';
