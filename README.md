@@ -32,6 +32,13 @@ Test build `_tokens.scss`:
 npm run tokens
 ```
 
+You'll need to include this `_tokens.scss` in your application SCSS file (see [`sass.scss`](https://github.com/area17/json-to-scss-variables-examples/blob/main/sass.scss))
+
+```scss
+@import '_tokens';
+@import '@area17/scss-utilities/a17-scss-utilities';
+```
+
 And then test build a `application.css` using `@area17/scss-utilities` and the generated `_tokens.scss`:
 
 ```zsh
@@ -65,6 +72,12 @@ Add scripts to your `package.json`:
 ```
 
 Place a copy of [`webpack.config.js`](https://github.com/area17/json-to-scss-variables-examples/blob/main/webpack.config.js) in your project root.
+
+Unlike the pure SASS version above, you don't need to include anything else in your application SCSS (see [`webpack.scss`](https://github.com/area17/json-to-scss-variables-examples/blob/main/webpack.scss)). For Webpack, we can use [@epegzz/sass-vars-loader](https://github.com/epegzz/sass-vars-loader) to inject the variables straight into the SCSS build.
+
+```scss
+@import '@area17/scss-utilities/a17-scss-utilities';
+```
 
 To test build:
 
