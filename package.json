@@ -5,16 +5,26 @@
   "author": "A17 <dev@area17.com> (https://area17.com/)",
   "license": "MIT",
   "scripts": {
-    "sass:build": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./application.scss:./application.css",
-    "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./application.scss:./application.css",
+    "sass:build": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
+    "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
     "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
     "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-    "watch": "npm run sass:watch & npm run tokens:watch"
+    "watch": "npm run sass:watch & npm run tokens:watch",
+    "webpack:build": "webpack",
+    "webpack:watch": "webpack --watch"
   },
   "dependencies": {
     "@area17/scss-utilities": "^1.0.0",
+    "@epegzz/sass-vars-loader": "^6.1.0",
     "json-to-scss": "github:area17/json-to-scss",
+    "mini-css-extract-plugin": "^2.6.1",
     "nodemon": "^2.0.19",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-fix-style-only-entries": "^0.6.1",
+    "css-loader": "^6.7.1",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1"
   }
 }
