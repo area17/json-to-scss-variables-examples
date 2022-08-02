@@ -2,16 +2,16 @@
 
 Demo repository to convert JSON to SCSS variables.
 
-These examples assume you already have some familiarity with `node`, `npm`, `webpack`, `package.json` `scripts` and the demo setups aren't complete; they don't control source maps, minification, JavaScript compilation, version hashing etc. Instead they serve as quick reference guides to using a tokens config JSON file with [@area17/scss-utilities](https://github.com/area17/scss-utilities).
+These examples assume you already have some familiarity with `node`, `npm`, `webpack`, `package.json` `scripts` and/or `vite`. These demo setups aren't complete; they don't control source maps, minification, JavaScript compilation, version hashing etc. Instead they serve as quick reference guides to using a tokens config JSON file with [@area17/scss-utilities](https://github.com/area17/scss-utilities).
 
-## Using Dart Sass
+## Using Dart SASS
 
-Using the default Dart Sass set up as shown on the [Sass site](https://sass-lang.com/install).
+Using the default Dart SASS set up as shown on the [Sass site](https://sass-lang.com/install).
 
 Install dependencies:
 
 ```zsh
-npm @area17/scss-utilities json-to-scss install nodemon install sass
+npm install @area17/scss-utilities json-to-scss nodemon sass
 ```
 
 Add scripts to your `package.json`:
@@ -22,7 +22,8 @@ Add scripts to your `package.json`:
   "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
   "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
   "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-  "watch": "npm run sass:watch & npm run tokens:watch"
+  "build": "npm run tokens & npm run sass:build",
+  "watch": "npm run tokens:watch & npm run sass:watch"
 },
 ```
 
@@ -91,6 +92,39 @@ For development, watch the `frontend.config.json` and process:
 npm run webpack:watch
 ```
 
-## TO DO
+## Vite
 
-* Vite version
+Similar to using Dart SASS:
+
+```zsh
+npm install @area17/scss-utilities json-to-scss nodemon sass
+```
+
+Update the scripts in your `package.json` (update the default `vite build` and `vite dev`):
+
+```json
+"scripts": {
+  "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
+  "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
+  "build": "npm run tokens && vite build",
+  "dev": "npm run tokens:watch & vite"
+},
+```
+
+Test build `_tokens.scss`:
+
+```zsh
+npm run tokens
+```
+
+Run Vite build:
+
+```zsh
+npm run build
+```
+
+Run Vite dev:
+
+```zsh
+npm run dev
+```

@@ -9,7 +9,7 @@
     "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
     "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
     "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-    "watch": "npm run sass:watch & npm run tokens:watch",
+    "watch": "npm run tokens:watch & npm run sass:watch",
     "webpack:build": "webpack",
     "webpack:watch": "webpack --watch"
   },
