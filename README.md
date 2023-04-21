@@ -11,19 +11,20 @@ Using the default Dart SASS set up as shown on the [Sass site](https://sass-lang
 Install dependencies:
 
 ```zsh
-npm install @area17/scss-utilities json-to-scss nodemon sass
+npm install @area17/scss-utilities
+npm install --save-dev json-to-scss nodemon sass concurrently
 ```
 
 Add scripts to your `package.json`:
 
 ```json
 "scripts": {
-  "sass:build": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
-  "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
+  "build": "npm run tokens && npm run sass",
+  "dev": "npm run tokens && concurrently --raw --kill-others \"npm:dev:*\"",
+  "dev:sass": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
+  "dev:tokens": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens",
+  "sass": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
   "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-  "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-  "build": "npm run tokens & npm run sass:build",
-  "watch": "npm run tokens:watch & npm run sass:watch"
 },
 ```
 
@@ -49,7 +50,7 @@ npm run sass:build
 For development, watch the `frontend.config.json` and process:
 
 ```
-npm run watch
+npm run dev
 ```
 
 Uses `nodemon` to look for changes in the JSON and concurrently runs SASS in watch mode.
@@ -60,7 +61,8 @@ Uses `nodemon` to look for changes in the JSON and concurrently runs SASS in wat
 Install dependencies:
 
 ```zsh
-npm install @area17/scss-utilities @epegzz/sass-vars-loader webpack webpack-cli webpack-fix-style-only-entries css-loader sass-loader style-loader sass
+npm install @area17/scss-utilities
+npm install --save-dev @epegzz/sass-vars-loader webpack webpack-cli webpack-fix-style-only-entries css-loader sass-loader style-loader sass
 ```
 
 Add scripts to your `package.json`:
@@ -97,17 +99,20 @@ npm run webpack:watch
 Similar to using Dart SASS:
 
 ```zsh
-npm install @area17/scss-utilities json-to-scss nodemon sass
+npm install @area17/scss-utilities
+npm install --save-dev json-to-scss nodemon sass concurrently
 ```
 
 Update the scripts in your `package.json` (update the default `vite build` and `vite dev`):
 
 ```json
 "scripts": {
-  "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-  "tokens:watch": "npx nodemon --watch frontend.config.json ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
   "build": "npm run tokens && vite build",
-  "dev": "npm run tokens:watch & vite"
+  "dev": "npm run tokens && concurrently --raw --kill-others \"npm:dev:*\"",
+  "dev:tokens": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens",
+  "dev:vite": "vite",
+  "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.scss.json ./frontend/scss/_tokens.scss --kv",
+  "tokens:watch": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens"
 },
 ```
 

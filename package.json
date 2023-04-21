@@ -1,20 +1,24 @@
 {
   "name": "json-to-scss",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Examples of compiling SCSS with tokens provided by a JSON file",
   "author": "A17 <dev@area17.com> (https://area17.com/)",
   "license": "MIT",
   "scripts": {
-    "sass:build": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
-    "sass:watch": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
+    "build": "npm run tokens && npm run sass",
+    "dev": "npm run tokens && concurrently --raw --kill-others \"npm:dev:*\"",
+    "dev:sass": "sass --watch --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
+    "dev:tokens": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens",
+    "sass": "sass --load-path=node_modules --load-path=./ --style=expanded --no-source-map ./sass.scss:./dist/application.css",
     "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.json _tokens.scss --kv",
-    "tokens:watch": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens",
-    "watch": "npm run tokens:watch & npm run sass:watch",
     "webpack:build": "webpack",
     "webpack:watch": "webpack --watch"
   },
   "dependencies": {
-    "@area17/scss-utilities": "^1.0.0",
+    "@area17/scss-utilities": "^1.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
     "@epegzz/sass-vars-loader": "^6.1.0",
     "json-to-scss": "github:area17/json-to-scss",
     "mini-css-extract-plugin": "^2.6.1",
