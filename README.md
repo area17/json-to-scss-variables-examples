@@ -111,8 +111,7 @@ Update the scripts in your `package.json` (update the default `vite build` and `
   "dev": "npm run tokens && concurrently --raw --kill-others \"npm:dev:*\"",
   "dev:tokens": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens",
   "dev:vite": "vite",
-  "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.scss.json ./frontend/scss/_tokens.scss --kv",
-  "tokens:watch": "npx nodemon --exitcrash --watch frontend.config.json -e json --exec npm run tokens"
+  "tokens": "node ./node_modules/.bin/json-to-scss frontend.config.scss.json ./frontend/scss/_tokens.scss --kv"
 },
 ```
 
